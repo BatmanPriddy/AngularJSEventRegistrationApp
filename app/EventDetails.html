@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" ng-app="eventsApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Event Registration</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+  </head>
+
+  <body ng-cloak>
+    <div class="container">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <ul class="nav">
+            <li><a href="NewEvent.html">Create Event</a></li>
+          </ul>
+        </div>
+      </div>
+      <div ng-controller="EventController" style="padding-left: 20px; padding-right: 20px;">
+        <img ng-src="{{event.imageUrl}}" alt="{{event.name}}" />
+        <div class="row">
+          <div class="spann11">
+            <h2>{{event.name | uppercase}}</h2>
+            <!--<h2 ng-class="myclass" ng-bind-template="{{event.name}} {{event.date}}"></h2>-->
+          </div>
+        </div>
+
+        <!--<button class="btn" ng-disabled="buttonDisabled">Disabled</button>
+
+        <div ng-non-bindable>{{1 + 2}}</div>
+
+        <div ng-bind-html-unsafe="snippet">some title</div>
+        <div ng-bind-html="snippet">some title</div>
+
+        <h2 ng-show="boolValue">Show This</h2>
+        <h2 ng-hide="boolValue">Hide This</h2>-->
+
+        <div class="row">
+          <div class="span3">
+            <div><strong>Date:</strong> {{event.date | date: 'mediumDate' }}</div>
+            <div><strong>Time:</strong> {{event.time}}</div>
+            <div><strong>Price:</strong> {{ 34 | currency }}</div>
+          </div>
+          <div class="span4">
+            <address>
+              <strong>Address:</strong><br />
+              {{event.location.address}}<br />
+              {{event.location.city}}, {{event.location.province}}
+            </address>
+          </div>
+        </div>
+
+        <div>{{ 3 | number:2 }}</div>
+        <div>{{ {a:3, b:'hi', c:{aa:35} } | json }}</div>
+
+        <hr />
+
+        <h3>Sessions</h3>
+        Order By:
+        <select ng-model="sortorder" class="input-small">
+          <option selected value="name">Name</option>
+          <option value="-upVoteCount">Votes</option>
+        </select>
+        Show:
+        <select ng-model="query.level" class="input-medium">
+          <option selected value="">All</option>
+          <option value="introductory">Introductory</option>
+          <option value="intermediate">intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+        <ul class="thumbnails">
+          <li ng-repeat="session in event.sessions | orderBy:sortorder | filter:query"> <!--| limitTo:2-->
+
+            <div class="row session">
+              <div class="span0 well votingWidget">
+                <div class="votingButton" ng-click="upVoteSession(session)">
+                  <i class="icon-chevron-up icon-white"></i>
+                </div>
+                <div class="badge badge-inverse">
+                  <div>{{session.upVoteCount}}</div>
+                </div>
+                <div class="votingButton" ng-click="downVoteSession(session)">
+                  <i class="icon-chevron-down"></i>
+                </div>
+              </div>
+
+              <div class="well span9">
+                <h4 class="well-title">{{session.name}}</h4>
+                <h6 style="margin-top: -10px;">{{session.name}}</h6>
+                <span>Duration: {{session.duration | durations}}</span><br />
+                <span>Level: <i class="{{session.level | levels}}"></i></span>
+
+                <p>{{session.abstract}}</p>
+              </div>
+            </div>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/underscore-1.4.4.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-sanitize.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/EventController.js"></script>
+    <script src="js/services/EventData.js"></script>
+    <script src="js/filters.js"></script>
+  </body>
+</html>
